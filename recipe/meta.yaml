@@ -10,7 +10,6 @@ source:
   sha256: b756ac8c69175d04e972c3b4deb6b689986d4260fbe83e32caea52d1061995a0
 
 build:
-  script: go install -v .
   number: 0
 
 requirements:
