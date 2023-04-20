@@ -1,11 +1,11 @@
-About s5cmd
-===========
+About s5cmd-feedstock
+=====================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/s5cmd-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/peak/s5cmd
 
 Package license: Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND ISC AND MIT AND MPL-2.0
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/s5cmd-feedstock/blob/main/LICENSE.txt)
 
 Summary: s5cmd is a very fast S3 and local filesystem execution tool.
 
