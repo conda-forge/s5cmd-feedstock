@@ -1,5 +1,5 @@
 {% set name = "s5cmd" %}
-{% set version = "2.2.0" %}
+{% set version = "2.2.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/peak/s5cmd/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 1884052843f45045a6f24cff03a32253991b5839e2f7ae5dcaaa1060f2e1756f
+  sha256: a9c057b577106117202619b99fc1f5d0b65fe4d43f41de59c4a4820e5f9379a9
 
 build:
   script: go install -v .
