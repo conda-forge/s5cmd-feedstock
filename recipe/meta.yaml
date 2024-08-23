@@ -11,10 +11,17 @@ source:
 
 build:
   number: 1
+  script:
+    - go build -ldflags "-X main.revision=conda-forge" -v -o $PREFIX/bin/s5cmd  # [not win]
+    - go build -ldflags "-X main.revision=conda-forge" -v -o %LIBRARY_BIN%\s5cmd.exe  # [win]
+    - go-licenses save . --save_path ../../../../library_licenses
+    # Clear out cache to avoid file not removable warnings
+    - chmod -R u+w $(go env GOPATH) && rm -r $(go env GOPATH)  # [unix]
 
 requirements:
   build:
     - {{ compiler('go') }}
+    - go-licenses
 
 test:
   commands:
