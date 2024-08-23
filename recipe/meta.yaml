@@ -10,8 +10,7 @@ source:
   sha256: 6f96a09a13198b84a23b7b7ff0b93f947434a185093284e13d05c0e864907f48
 
 build:
-  script: go install -v .
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -38,3 +37,5 @@ about:
 extra:
   recipe-maintainers:
     - benjaminrwilson
+    - iamthebot
+    - 
