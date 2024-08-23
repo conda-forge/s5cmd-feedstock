@@ -193,4 +193,5 @@ Feedstock Maintainers
 =====================
 
 * [@benjaminrwilson](https://github.com/benjaminrwilson/)
+* [@iamthebot](https://github.com/iamthebot/)
 
