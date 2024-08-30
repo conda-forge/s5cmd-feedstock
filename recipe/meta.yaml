@@ -10,12 +10,18 @@ source:
   sha256: 6f96a09a13198b84a23b7b7ff0b93f947434a185093284e13d05c0e864907f48
 
 build:
-  script: go install -v .
-  number: 0
+  number: 1
+  script:
+    - go build -ldflags "-X main.revision=conda-forge" -v -o $PREFIX/bin/s5cmd  # [not win]
+    - go build -ldflags "-X main.revision=conda-forge" -v -o %LIBRARY_BIN%\s5cmd.exe  # [win]
+    - go-licenses save . --save_path ../../../../library_licenses
+    # Clear out cache to avoid file not removable warnings
+    - chmod -R u+w $(go env GOPATH) && rm -r $(go env GOPATH)  # [unix]
 
 requirements:
   build:
     - {{ compiler('go') }}
+    - go-licenses
 
 test:
   commands:
@@ -38,3 +44,4 @@ about:
 extra:
   recipe-maintainers:
     - benjaminrwilson
+    - iamthebot
