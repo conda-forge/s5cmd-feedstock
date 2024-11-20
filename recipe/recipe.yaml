@@ -1,45 +1,48 @@
-{% set name = "s5cmd" %}
-{% set version = "2.2.2" %}
+context:
+  name: s5cmd
+  version: 2.2.2
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: ${{ name|lower }}
+  version: ${{ version }}
 
 source:
-  url: https://github.com/peak/s5cmd/archive/refs/tags/v{{ version }}.tar.gz
+  url: https://github.com/peak/s5cmd/archive/refs/tags/v${{ version }}.tar.gz
   sha256: 6f96a09a13198b84a23b7b7ff0b93f947434a185093284e13d05c0e864907f48
 
 build:
   number: 1
   script:
-    - go build -ldflags "-X main.revision=conda-forge" -v -o $PREFIX/bin/s5cmd  # [not win]
-    - go build -ldflags "-X main.revision=conda-forge" -v -o %LIBRARY_BIN%\s5cmd.exe  # [win]
+    - if: not win
+      then: "go build -ldflags \"-X main.revision=conda-forge\" -v -o $PREFIX/bin/s5cmd"
+    - if: win
+      then: "go build -ldflags \"-X main.revision=conda-forge\" -v -o %LIBRARY_BIN%\\s5cmd.exe"
     - go-licenses save . --save_path ../../../../library_licenses
     # Clear out cache to avoid file not removable warnings
-    - chmod -R u+w $(go env GOPATH) && rm -r $(go env GOPATH)  # [unix]
+    - if: unix
+      then: chmod -R u+w $(go env GOPATH) && rm -r $(go env GOPATH)
 
 requirements:
   build:
-    - {{ compiler('go') }}
+    - ${{ compiler('go') }}
     - go-licenses
 
-test:
-  commands:
-    - s5cmd --help
+tests:
+  - script:
+      - s5cmd --help
 
 about:
-  home: https://github.com/peak/s5cmd
   summary: s5cmd is a very fast S3 and local filesystem execution tool.
   description: |
     s5cmd is a very fast S3 and local filesystem execution tool.
     It comes with support for a multitude of operations including tab completion and wildcard support for files,
     which can be very handy for your object storage workflow while working with large number of files.
   license: Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND ISC AND MIT AND MPL-2.0
-  license_family: MIT
   license_file:
     - library_licenses/
-  doc_url: https://github.com/peak/s5cmd
-  dev_url: https://github.com/peak/s5cmd
+  homepage: https://github.com/peak/s5cmd
+  repository: https://github.com/peak/s5cmd
+  documentation: https://github.com/peak/s5cmd
 
 extra:
   recipe-maintainers:
