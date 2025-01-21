@@ -1,6 +1,6 @@
 context:
   name: s5cmd
-  version: 2.2.2
+  version: "2.3.0"
 
 package:
   name: ${{ name|lower }}
@@ -8,10 +8,10 @@ package:
 
 source:
   url: https://github.com/peak/s5cmd/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 6f96a09a13198b84a23b7b7ff0b93f947434a185093284e13d05c0e864907f48
+  sha256: 6910763a7320010aa75fe9ef26f622e440c2bd6de41afdbfd64e78c158ca19d4
 
 build:
-  number: 1
+  number: 0
   script:
     - if: not win
       then: "go build -ldflags \"-X main.revision=conda-forge\" -v -o $PREFIX/bin/s5cmd"
